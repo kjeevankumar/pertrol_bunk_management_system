@@ -1,26 +1,163 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-background: #090a10;
+  --color-foreground: #f8fafc;
+  
+  --color-card: #0d0f17;
+  --color-card-foreground: #f1f5f9;
+  
+  --color-popover: #0d0f17;
+  --color-popover-foreground: #f1f5f9;
+  
+  --color-primary: #0066ff;
+  --color-primary-foreground: #ffffff;
+  
+  --color-secondary: #1e293b;
+  --color-secondary-foreground: #cbd5e1;
+  
+  --color-muted: #1e293b;
+  --color-muted-foreground: #94a3b8;
+  
+  --color-accent: #1e293b;
+  --color-accent-foreground: #f8fafc;
+  
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-input: rgba(255, 255, 255, 0.03);
+  --color-ring: #0066ff;
+
+  /* Standard base colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  
+  /* Grays in Dark Mode scale */
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f4f4f5;
+  --color-gray-200: #e4e4e7;
+  --color-gray-300: #d4d4d8;
+  --color-gray-400: #a1a1aa;
+  --color-gray-500: #71717a;
+  --color-gray-600: #52525b;
+  --color-gray-700: #3f3f46;
+  --color-gray-800: #27272a;
+  --color-gray-900: #18181b;
+  --color-gray-950: #09090b;
+
+  /* Vibrant Colors for Indicators and Charts */
+  --color-blue-500: #0066ff;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background-color: #090a10;
+    color: #f8fafc;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Glassmorphism Styles (Sleek Obsidian Blue Theme) */
+.glass-panel {
+  background: rgba(13, 15, 23, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+  background: rgba(16, 19, 29, 0.75);
+  border-color: rgba(0, 102, 255, 0.25);
+  box-shadow: 0 12px 40px 0 rgba(0, 102, 255, 0.12);
+  transform: translateY(-2.5px);
+}
+
+.glass-panel-heavy {
+  background: rgba(9, 10, 16, 0.92);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+}
+
+/* Gradient text accent */
+.premium-gradient-text {
+  background: linear-gradient(135deg, #00d2ff 0%, #0066ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* CSS Contrast Safeguards inside Glass Panels */
+.glass-panel, .glass-panel-heavy {
+  color: #f8fafc;
+}
+
+/* Ensure placeholder text inside input fields inside glass panels has proper high contrast */
+.glass-panel ::placeholder, .glass-panel-heavy ::placeholder {
+  color: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1 !important;
+}
+
+/* Header Contrast Safeguards */
+header {
+  border-bottom-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+header kbd {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Force color overrides for utility indicators and charts to match monochromatic palette */
+.bg-primary .text-white, .bg-black .text-white,
+.bg-primary .text-primary-foreground, .bg-black .text-primary-foreground,
+.bg-primary svg, .bg-black svg,
+button.bg-primary, button.bg-black,
+button.bg-primary *, button.bg-black * {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Hide Next.js Dev Indicator to prevent layout and touch screen overlaps */
+nextjs-portal {
+  display: none !important;
+}
+
+/* Custom Scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Sonner Overrides for Dark Blue/Black Theme */
+.cn-toast {
+  background: rgba(13, 15, 23, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f8fafc !important;
+  backdrop-filter: blur(16px) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
 }
