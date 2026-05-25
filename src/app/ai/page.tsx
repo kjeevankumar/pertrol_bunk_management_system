@@ -149,17 +149,17 @@ export default function AIAssistant() {
 
   return (
     <DashboardLayout>
-      <div className="p-4 lg:p-8 space-y-8 max-w-7xl mx-auto h-[calc(100vh-120px)] flex flex-col">
+      <div className="p-3 sm:p-4 lg:p-8 space-y-4 md:space-y-8 max-w-7xl mx-auto h-[calc(100vh-140px)] md:h-[calc(100vh-120px)] flex flex-col">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
           <div>
-            <h1 className="text-3xl font-black tracking-tight text-white flex items-center gap-2">
-              AI Command Center <Brain className="w-7 h-7 text-primary animate-pulse" />
+            <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white flex items-center gap-2">
+              AI Command Center <Brain className="w-6 h-6 md:w-7 md:h-7 text-primary animate-pulse" />
             </h1>
-            <p className="text-muted-foreground mt-1">Real-time operational intelligence and business forecasting.</p>
+            <p className="text-xs md:text-sm text-muted-foreground mt-0.5">Real-time operational intelligence and business forecasting.</p>
           </div>
-          <Button variant="outline" onClick={fetchOperationalSnapshot} className="border-white/10 hover:bg-white/5 text-white">
-            <RefreshCw className="w-4 h-4 mr-2" /> Refresh Data
+          <Button variant="outline" onClick={fetchOperationalSnapshot} className="border-white/10 hover:bg-white/5 text-white h-9 sm:h-10 text-xs sm:text-sm">
+            <RefreshCw className="w-3.5 h-3.5 mr-2" /> Refresh Data
           </Button>
         </div>
 
@@ -236,24 +236,24 @@ export default function AIAssistant() {
 
           {/* Right Panel: Chat Interface */}
           <Card className="lg:col-span-8 glass-panel border-white/5 flex flex-col overflow-hidden bg-black/20">
-            <CardHeader className="border-b border-white/5 py-4 shrink-0">
+            <CardHeader className="border-b border-white/5 p-3 sm:p-6 py-3 sm:py-4 shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
-                    <Bot className="w-6 h-6 text-primary" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
+                    <Bot className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                   </div>
                   <div>
-                    <CardTitle className="text-base font-black">AI Operations Assistant</CardTitle>
+                    <CardTitle className="text-sm sm:text-base font-black">AI Operations Assistant</CardTitle>
                     <div className="flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                      <span className="text-[10px] text-emerald-500 font-bold uppercase tracking-widest">Realtime Context Active</span>
+                      <span className="text-[9px] sm:text-[10px] text-emerald-500 font-bold uppercase tracking-widest">Realtime Context Active</span>
                     </div>
                   </div>
                 </div>
               </div>
             </CardHeader>
             
-            <CardContent className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar bg-[url('/grid.svg')] bg-center bg-fixed">
+            <CardContent className="flex-1 overflow-y-auto p-3.5 sm:p-6 space-y-4 md:space-y-6 custom-scrollbar bg-[url('/grid.svg')] bg-center bg-fixed">
               {messages.map((msg, i) => (
                 <motion.div
                   key={i}
@@ -261,19 +261,19 @@ export default function AIAssistant() {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                    <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center border ${
+                  <div className={`flex gap-2 sm:gap-3 max-w-[90%] sm:max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                    <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full shrink-0 flex items-center justify-center border ${
                       msg.role === 'user' ? 'bg-white/5 border-white/10' : 'bg-primary/10 border-primary/20'
                     }`}>
-                      {msg.role === 'user' ? <User className="w-4 h-4 text-white/60" /> : <Bot className="w-4 h-4 text-primary" />}
+                      {msg.role === 'user' ? <User className="w-3.5 h-3.5 text-white/60" /> : <Bot className="w-3.5 h-3.5 text-primary" />}
                     </div>
-                    <div className={`rounded-2xl p-4 text-sm leading-relaxed ${
+                    <div className={`rounded-2xl p-3 sm:p-4 text-xs sm:text-sm leading-relaxed ${
                       msg.role === 'user' 
                         ? 'bg-primary text-white font-medium rounded-tr-none shadow-lg' 
                         : 'glass-panel border-white/10 text-white/90 rounded-tl-none shadow-xl'
                     }`}>
                       {msg.content}
-                      <div className={`text-[9px] mt-2 opacity-40 font-bold uppercase tracking-widest ${msg.role === 'user' ? 'text-right' : 'text-left'}`}>
+                      <div className={`text-[8px] sm:text-[9px] mt-1.5 opacity-40 font-bold uppercase tracking-widest ${msg.role === 'user' ? 'text-right' : 'text-left'}`}>
                         {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </div>
                     </div>
@@ -282,13 +282,13 @@ export default function AIAssistant() {
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="flex gap-3 max-w-[85%]">
-                    <div className="w-8 h-8 rounded-full shrink-0 flex items-center justify-center border bg-primary/10 border-primary/20">
-                      <Bot className="w-4 h-4 text-primary" />
+                  <div className="flex gap-2 sm:gap-3 max-w-[90%] sm:max-w-[85%]">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full shrink-0 flex items-center justify-center border bg-primary/10 border-primary/20">
+                      <Bot className="w-3.5 h-3.5 text-primary" />
                     </div>
-                    <div className="glass-panel border-white/10 p-4 rounded-2xl rounded-tl-none flex items-center gap-2">
-                      <Loader2 className="w-4 h-4 text-primary animate-spin" />
-                      <span className="text-xs text-white/60 font-medium">Analyzing operational data...</span>
+                    <div className="glass-panel border-white/10 p-3 sm:p-4 rounded-2xl rounded-tl-none flex items-center gap-2">
+                      <Loader2 className="w-3.5 h-3.5 text-primary animate-spin" />
+                      <span className="text-[11px] sm:text-xs text-white/60 font-medium">Analyzing operational data...</span>
                     </div>
                   </div>
                 </div>
@@ -296,23 +296,23 @@ export default function AIAssistant() {
               <div ref={chatEndRef} />
             </CardContent>
 
-            <div className="p-4 border-t border-white/5 bg-black/40 shrink-0">
+            <div className="p-3 sm:p-4 border-t border-white/5 bg-black/40 shrink-0">
               <form onSubmit={handleSendMessage} className="relative">
                 <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask me anything about your business operations..."
-                  className="bg-white/5 border-white/10 h-14 pl-5 pr-14 rounded-2xl focus-visible:ring-primary focus-visible:border-primary/50 text-white placeholder:text-white/20"
+                  placeholder="Ask about operations..."
+                  className="bg-white/5 border-white/10 h-11 sm:h-14 pl-4 pr-12 rounded-xl sm:rounded-2xl focus-visible:ring-primary focus-visible:border-primary/50 text-xs sm:text-sm text-white placeholder:text-white/20"
                 />
                 <Button 
                   type="submit" 
                   disabled={isLoading || !input.trim()}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-xl bg-primary hover:bg-primary/90 text-white p-0"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 h-8 w-8 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl bg-primary hover:bg-primary/90 text-white p-0"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-3.5 h-3.5" />
                 </Button>
               </form>
-              <div className="mt-3 flex gap-4 overflow-x-auto pb-1 no-scrollbar scroll-smooth">
+              <div className="mt-3 flex gap-2 overflow-x-auto pb-1 no-scrollbar scroll-smooth">
                 {[
                   "Show suspicious sales",
                   "Analyze fuel trends",
@@ -322,7 +322,7 @@ export default function AIAssistant() {
                   <button
                     key={suggestion}
                     onClick={() => { setInput(suggestion); }}
-                    className="text-[10px] font-bold text-white/40 hover:text-primary hover:bg-primary/5 px-3 py-1.5 rounded-full border border-white/5 hover:border-primary/20 transition-all whitespace-nowrap uppercase tracking-wider"
+                    className="text-[9px] sm:text-[10px] font-semibold bg-white/[0.02] border border-white/10 text-white/70 hover:text-primary hover:border-primary/45 px-2.5 py-1.5 rounded-full transition-all whitespace-nowrap uppercase tracking-wider"
                   >
                     {suggestion}
                   </button>
